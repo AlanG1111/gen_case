@@ -32,11 +32,7 @@ const ApiService = {
             AxiosResponse<any, any>,
             any
           >("/auth/anonymous?platform=subscriptions");
-          // TODO
-          // config.headers["Authorization"] = `Bearer ${data.token}`;
-          config.headers[
-            "Authorization"
-          ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZDNhMjcyMC00NGZjLTRlNDQtYTUyYi1jNjBhNWNhZmQ5YzMiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg3NzgxNDEsImV4cCI6MTY3OTY3ODE0MX0.iTM25DqtGJAfN90wK736xwSndc_J558Ibkie1Us9vJo`;
+          config.headers["Authorization"] = `Bearer ${data.token}`;
         } catch (error) {
           return Promise.reject(error);
         }
