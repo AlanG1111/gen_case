@@ -16,9 +16,9 @@ import "./App.css";
 
 function App() {
   return (
-    <div className='App'>
-      <Header />
-      <Router>
+    <Router>
+      <div className='App'>
+        <Header />
         <Container>
           <Routes>
             <Route path={UserRoutes.Courses} element={<Courses />} />
@@ -29,8 +29,8 @@ function App() {
             />
           </Routes>
         </Container>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 
