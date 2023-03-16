@@ -1,10 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SingleLessonType } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
 
 import { fetchAllCourses } from "./thunks";
 
-interface IState {
-  courses: any;
+interface IPayloadCourses {
+  courses: SingleLessonType[];
+}
+
+interface ICoursesState {
+  courses: IPayloadCourses | null;
   loading:
     | LoadingResultsT.IDLE
     | LoadingResultsT.PENDING
@@ -13,7 +18,7 @@ interface IState {
   error?: string | null;
 }
 
-const initialState: IState = {
+const initialState: ICoursesState = {
   courses: null,
   loading: LoadingResultsT.IDLE,
   error: null,
@@ -37,7 +42,7 @@ const getCoursesListSlice = createSlice({
       })
       .addCase(fetchAllCourses.fulfilled, (state, { payload }) => {
         state.loading = LoadingResultsT.SUCCEEDED;
-        state.courses = payload;
+        state.courses = payload as IPayloadCourses;
       })
       .addCase(fetchAllCourses.rejected, (state, { payload }) => {
         state.loading = LoadingResultsT.FAILED;
