@@ -1,9 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 import getCoursesListSlice from "./courses/slice";
+import getLessonSlice from "./lesson/slice";
 
 const rootReducer = combineReducers({
   coursesList: getCoursesListSlice.reducer,
+  lesson: getLessonSlice.reducer,
 });
 
 export const store = configureStore({

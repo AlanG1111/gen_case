@@ -1,15 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LessonFromCourseList } from "../../types/lesson";
+import { SingleLessonType } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
 
-import { fetchAllCourses } from "./thunks";
-
-interface IPayloadCourses {
-  courses: LessonFromCourseList[];
-}
+import { fetchLesson } from "./thunks";
 
 interface ICoursesState {
-  courses: IPayloadCourses | null | undefined;
+  lesson: SingleLessonType | null;
   loading:
     | LoadingResultsT.IDLE
     | LoadingResultsT.PENDING
@@ -19,36 +15,36 @@ interface ICoursesState {
 }
 
 const initialState: ICoursesState = {
-  courses: null,
+  lesson: null,
   loading: LoadingResultsT.IDLE,
   error: null,
 };
 
-const getCoursesListSlice = createSlice({
-  name: "coursesList",
+const getLessonSlice = createSlice({
+  name: "lesson",
   initialState,
   reducers: {
     resetLoading: (state) => {
       state.loading = LoadingResultsT.IDLE;
     },
-    resetCourses: (state) => {
-      state.courses = null;
+    resetLesson: (state) => {
+      state.lesson = null;
     },
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchAllCourses.pending, (state) => {
+      .addCase(fetchLesson.pending, (state) => {
         state.loading = LoadingResultsT.PENDING;
       })
-      .addCase(fetchAllCourses.fulfilled, (state, { payload }) => {
+      .addCase(fetchLesson.fulfilled, (state, { payload }) => {
         state.loading = LoadingResultsT.SUCCEEDED;
-        state.courses = payload as IPayloadCourses;
+        state.lesson = payload as SingleLessonType;
       })
-      .addCase(fetchAllCourses.rejected, (state, { payload }) => {
+      .addCase(fetchLesson.rejected, (state, { payload }) => {
         state.loading = LoadingResultsT.FAILED;
         state.error = payload as string;
       }),
 });
 
-export const { actions } = getCoursesListSlice;
-export default getCoursesListSlice;
+export const { actions } = getLessonSlice;
+export default getLessonSlice;

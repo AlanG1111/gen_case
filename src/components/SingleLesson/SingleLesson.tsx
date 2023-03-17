@@ -10,10 +10,10 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import { SingleLessonType } from "../../types/lesson";
+import { LessonFromCourseList } from "../../types/lesson";
 
 interface ILesson {
-  data?: SingleLessonType;
+  data?: LessonFromCourseList;
 }
 
 const SingleLesson: React.FC<ILesson> = ({ data }) => {

@@ -17,7 +17,7 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { fetchAllCourses } from "../../redux/courses/thunks";
 import { actions as coursesActions } from "../../redux/courses/slice";
 
-import { SingleLessonType } from "../../types/lesson";
+import { LessonFromCourseList } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
 
 const Courses: React.FC = (props) => {
@@ -37,7 +37,6 @@ const Courses: React.FC = (props) => {
     };
   }, [dispatch]);
 
-  console.log(coursesList);
   const allCurses = useMemo(() => {
     if (coursesList) {
       const lastPageIndex = currentPageNumber * 10;
@@ -77,7 +76,7 @@ const Courses: React.FC = (props) => {
         )}
         <Container sx={{ display: "flex", flexWrap: "wrap" }}>
           {allCurses &&
-            allCurses?.map((lesson: SingleLessonType) => (
+            allCurses?.map((lesson: LessonFromCourseList) => (
               <SingleLesson key={lesson.id} data={lesson} />
             ))}
         </Container>
