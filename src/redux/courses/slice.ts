@@ -9,7 +9,7 @@ interface IPayloadCourses {
 }
 
 interface ICoursesState {
-  courses: IPayloadCourses | null;
+  courses: IPayloadCourses | null | undefined;
   loading:
     | LoadingResultsT.IDLE
     | LoadingResultsT.PENDING

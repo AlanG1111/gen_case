@@ -30,7 +30,7 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
     <>
       <Card
         sx={{
-          maxWidth: 335,
+          maxWidth: "455px",
           margin: "50px auto",
           paddingBottom: "20px",
           display: "flex",
@@ -41,9 +41,8 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
         onMouseLeave={handleMouseLeave}
       >
         <Box>
-          {" "}
           <CardMedia
-            sx={{ height: 190 }}
+            sx={{ height: "170px" }}
             image={`${data?.previewImageLink}/cover.webp`}
             title={data?.title}
           />
