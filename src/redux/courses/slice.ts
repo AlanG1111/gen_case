@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LessonFromCourseList } from "../../types/lesson";
+import { CourseFromListType } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
 
 import { fetchAllCourses } from "./thunks";
 
 interface IPayloadCourses {
-  courses: LessonFromCourseList[];
+  courses: CourseFromListType[];
 }
 
 interface ICoursesState {

@@ -1,4 +1,4 @@
-export type LessonFromCourseList = {
+export type CourseFromListType = {
   containsLockedLessons: boolean;
   description: string;
   duration: number;
@@ -21,7 +21,7 @@ export type LessonFromCourseList = {
   title: string;
 };
 
-export type SingleLessonType = {
+export type SingleCourseType = {
   id: string;
   title: string;
   tags: string[];
@@ -40,16 +40,18 @@ export type SingleLessonType = {
       previewImageLink: string;
     };
   };
-  lessons: {
-    id: string;
-    title: string;
-    duration: number;
-    order: number;
-    type: string;
-    status: string;
-    link: string;
-    previewImageLink: string;
-    meta: null;
-  }[];
+  lessons: LessonFromCourse[];
   containsLockedLessons: boolean;
+};
+
+export type LessonFromCourse = {
+  id: string;
+  title: string;
+  duration: number;
+  order: number;
+  type: string;
+  status: string;
+  link: string;
+  previewImageLink: string;
+  meta: null;
 };

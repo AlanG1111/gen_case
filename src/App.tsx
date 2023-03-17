@@ -8,8 +8,7 @@ import {
 } from "react-router-dom";
 
 import Courses from "./pages/Courses/Courses";
-import Lesson from "./pages/Lesson/Lesson";
-import Header from "./components/Header/Header";
+import SingleCourse from "./pages/SingleCourse/SingleCourse";
 import { UserRoutes } from "./helpers/routes";
 
 import "./App.css";
@@ -18,11 +17,10 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        <Header />
         <Container>
           <Routes>
             <Route path={UserRoutes.Courses} element={<Courses />} />
-            <Route path={UserRoutes.Lesson} element={<Lesson />} />
+            <Route path={UserRoutes.Lesson} element={<SingleCourse />} />
             <Route
               path='*'
               element={<Navigate to={UserRoutes.Courses} replace />}

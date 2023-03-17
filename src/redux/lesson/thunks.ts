@@ -4,7 +4,7 @@ import { API_CONFIG } from "../middleware/config";
 
 export const fetchLesson = createAsyncThunk(
   "lesson/fetchLesson",
-  async (courseId: number, { rejectWithValue }) => {
+  async (courseId: string, { rejectWithValue }) => {
     try {
       const { data } = await ApiService.apiCall({
         baseURL: API_CONFIG.BASE_URL,

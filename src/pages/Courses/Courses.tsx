@@ -17,7 +17,7 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { fetchAllCourses } from "../../redux/courses/thunks";
 import { actions as coursesActions } from "../../redux/courses/slice";
 
-import { LessonFromCourseList } from "../../types/lesson";
+import { CourseFromListType } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
 
 const Courses: React.FC = (props) => {
@@ -76,7 +76,7 @@ const Courses: React.FC = (props) => {
         )}
         <Container sx={{ display: "flex", flexWrap: "wrap" }}>
           {allCurses &&
-            allCurses?.map((lesson: LessonFromCourseList) => (
+            allCurses?.map((lesson: CourseFromListType) => (
               <SingleLesson key={lesson.id} data={lesson} />
             ))}
         </Container>

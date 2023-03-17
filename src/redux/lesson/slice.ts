@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SingleLessonType } from "../../types/lesson";
+import { SingleCourseType } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
 
 import { fetchLesson } from "./thunks";
 
 interface ICoursesState {
-  lesson: SingleLessonType | null;
+  lesson: SingleCourseType | null;
   loading:
     | LoadingResultsT.IDLE
     | LoadingResultsT.PENDING
@@ -38,7 +38,7 @@ const getLessonSlice = createSlice({
       })
       .addCase(fetchLesson.fulfilled, (state, { payload }) => {
         state.loading = LoadingResultsT.SUCCEEDED;
-        state.lesson = payload as SingleLessonType;
+        state.lesson = payload as SingleCourseType;
       })
       .addCase(fetchLesson.rejected, (state, { payload }) => {
         state.loading = LoadingResultsT.FAILED;

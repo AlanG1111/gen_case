@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Card,
@@ -10,13 +11,14 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import { LessonFromCourseList } from "../../types/lesson";
+import { CourseFromListType } from "../../types/lesson";
 
 interface ILesson {
-  data?: LessonFromCourseList;
+  data?: CourseFromListType;
 }
 
 const SingleLesson: React.FC<ILesson> = ({ data }) => {
+  const navigate = useNavigate();
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseEnter = () => {
@@ -26,6 +28,11 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
   const handleMouseLeave = () => {
     setIsHovering(false);
   };
+
+  const handleLessonClick = () => {
+    navigate(`${data?.id}`);
+  };
+
   return (
     <>
       <Card
@@ -36,9 +43,15 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          transition: "box-shadow 0.3s ease-in-out",
+          cursor: "pointer",
+          "&:hover": {
+            boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+          },
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={handleLessonClick}
       >
         <Box>
           <CardMedia

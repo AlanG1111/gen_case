@@ -3,5 +3,5 @@
  */
 export enum UserRoutes {
   Courses = "/courses",
-  Lesson = "/lesson/:id",
+  Lesson = "/courses/:lessonId",
 }
