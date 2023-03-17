@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import Hls from "hls.js";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
   Card,
   CardContent,
-  CardMedia,
   List,
   ListItem,
   ListItemText,
@@ -14,19 +14,42 @@ import {
 import { CourseFromListType } from "../../types/lesson";
 
 interface ILesson {
-  data?: CourseFromListType;
+  data: CourseFromListType;
 }
 
 const SingleLesson: React.FC<ILesson> = ({ data }) => {
   const navigate = useNavigate();
-  const [isHovering, setIsHovering] = useState(false);
+  const video = document.getElementById(data.id) as HTMLVideoElement;
 
-  const handleMouseEnter = () => {
-    setIsHovering(true);
-  };
+  useEffect(() => {
+    let hls: any = null;
+    if (Hls.isSupported()) {
+      hls = new Hls();
+      hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+        console.log("video and hls.js are now bound together !");
+      });
+      hls.on(Hls.Events.MANIFEST_PARSED, function (_: any, data: any) {
+        console.log(
+          "manifest loaded, found " + data?.levels.length + " quality level"
+        );
+      });
+      hls.loadSource(`${data?.meta.courseVideoPreview?.link}`);
+      // bind them together
+      hls.attachMedia(video);
+    }
 
-  const handleMouseLeave = () => {
-    setIsHovering(false);
+    return () => {
+      hls.destroy();
+    };
+  }, [data?.meta.courseVideoPreview?.link, video]);
+
+  const togglePlayVideo = (e: any) => {
+    e.stopPropagation();
+    if (e.type === "mouseover" && video) {
+      video.play();
+    } else if (e.type === "mouseleave" && video) {
+      video.pause();
+    }
   };
 
   const handleLessonClick = () => {
@@ -49,15 +72,16 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
             boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
           },
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseOver={togglePlayVideo}
+        onMouseLeave={togglePlayVideo}
         onClick={handleLessonClick}
       >
         <Box>
-          <CardMedia
-            sx={{ height: "170px" }}
-            image={`${data?.previewImageLink}/cover.webp`}
-            title={data?.title}
+          <video
+            id={data.id}
+            muted
+            width='100%'
+            poster={`${data?.previewImageLink}/cover.webp`}
           />
           <CardContent>
             <Typography gutterBottom variant='h5' component='div'>

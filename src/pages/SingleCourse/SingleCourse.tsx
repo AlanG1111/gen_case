@@ -8,7 +8,6 @@ import {
   Container,
   List,
   ListItem,
-  ListItemButton,
   ListItemText,
   Typography,
 } from "@mui/material";
@@ -23,6 +22,7 @@ import { fetchLesson } from "../../redux/lesson/thunks";
 import { actions as lessonActions } from "../../redux/lesson/slice";
 import { LoadingResultsT } from "../../types/loading";
 import { LessonFromCourse } from "../../types/lesson";
+import LessonListItem from "../../components/LessonListItem/LessonListItem";
 
 const SingleCourse: React.FC = () => {
   const { lessonId } = useParams();
@@ -79,17 +79,12 @@ const SingleCourse: React.FC = () => {
               image={`${courseInfo?.previewImageLink}/cover.webp`}
               title={courseInfo?.title}
             />
-
             <List>
               <ListItem>
                 <ListItemText primary='Lessons:' />
               </ListItem>
-              {courseInfo?.lessons?.map((lesson: LessonFromCourse, index) => (
-                <ListItem key={index} sx={{ paddingTop: "0" }}>
-                  <ListItemButton disabled={lesson.status === "locked"}>
-                    <ListItemText secondary={lesson.title} />
-                  </ListItemButton>
-                </ListItem>
+              {courseInfo?.lessons?.map((lesson: LessonFromCourse) => (
+                <LessonListItem key={lesson.id} lesson={lesson} />
               ))}
             </List>
           </Box>
