@@ -1,4 +1,4 @@
-# Test app for "LegioSoft" .
+# Test app for "Genesis" .
 
 ## Getting Started
 
@@ -16,8 +16,4 @@ You will also see any lint errors in the console.
 
 ### Technologies
 
-React, TypeScript, axios, mock-api, MaterialUI
-
-## Link
-
-Open //TODO link
+React, TypeScript, axios, mock-api, MaterialUI, framer-motion

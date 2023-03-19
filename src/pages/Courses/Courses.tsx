@@ -3,7 +3,6 @@ import {
   Container,
   Stack,
   Pagination,
-  Box,
   CircularProgress,
   Alert,
   AlertTitle,
@@ -21,6 +20,7 @@ import { actions as coursesActions } from "../../redux/courses/slice";
 
 import { CourseFromListType } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
+import { StyledBox } from "./styles";
 
 const Courses: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -58,15 +58,9 @@ const Courses: React.FC = () => {
     <>
       <Stack spacing={2}>
         {loadingStatus === LoadingResultsT.PENDING && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "50px",
-            }}
-          >
+          <StyledBox>
             <CircularProgress />
-          </Box>
+          </StyledBox>
         )}
         {loadingStatus === LoadingResultsT.FAILED && (
           <Alert severity='error'>

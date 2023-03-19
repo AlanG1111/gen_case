@@ -3,7 +3,6 @@ import {
   Alert,
   AlertTitle,
   Box,
-  Card,
   CardContent,
   CardMedia,
   CircularProgress,
@@ -25,6 +24,7 @@ import { actions as lessonActions } from "../../redux/lesson/slice";
 import { LoadingResultsT } from "../../types/loading";
 import { LessonFromCourse } from "../../types/lesson";
 import LessonListItem from "../../components/LessonListItem/LessonListItem";
+import { StyledBox, StyledCard } from "./styles";
 
 const SingleCourse: React.FC = () => {
   const { lessonId } = useParams();
@@ -46,15 +46,9 @@ const SingleCourse: React.FC = () => {
   return (
     <Container>
       {loadingStatus === LoadingResultsT.PENDING && !courseInfo && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "50px",
-          }}
-        >
+        <StyledBox>
           <CircularProgress />
-        </Box>
+        </StyledBox>
       )}
       {loadingStatus === LoadingResultsT.FAILED && (
         <Alert severity='error'>
@@ -63,16 +57,7 @@ const SingleCourse: React.FC = () => {
         </Alert>
       )}
       {courseInfo && (
-        <Card
-          sx={{
-            maxWidth: "455px",
-            margin: "50px auto",
-            paddingBottom: "20px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
+        <StyledCard>
           <Box>
             <CardContent>
               <Typography gutterBottom variant='h5' component='div'>
@@ -96,7 +81,7 @@ const SingleCourse: React.FC = () => {
               ))}
             </List>
           </Box>
-        </Card>
+        </StyledCard>
       )}
     </Container>
   );

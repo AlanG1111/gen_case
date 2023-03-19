@@ -3,7 +3,6 @@ import Hls from "hls.js";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
-  Card,
   CardContent,
   List,
   ListItem,
@@ -12,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CourseFromListType } from "../../types/lesson";
+import { StyledCard } from "./styles";
 
 interface ILesson {
   data: CourseFromListType;
@@ -51,20 +51,7 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
 
   return (
     <>
-      <Card
-        sx={{
-          maxWidth: "455px",
-          margin: "50px auto",
-          paddingBottom: "20px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          transition: "box-shadow 0.3s ease-in-out",
-          cursor: "pointer",
-          "&:hover": {
-            boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
-          },
-        }}
+      <StyledCard
         onMouseOver={togglePlayVideo}
         onMouseLeave={togglePlayVideo}
         onClick={handleLessonClick}
@@ -101,12 +88,11 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
             </ListItem>
           </List>
         </Box>
-        <Box
-          sx={{
-            "& > legend": { mt: 2 },
-          }}
-        >
-          <Typography component='legend'>{`Rating: ${data?.rating}`}</Typography>
+        <Box>
+          <Typography
+            sx={{ mt: 2 }}
+            component='legend'
+          >{`Rating: ${data?.rating}`}</Typography>
           <Rating
             name='half-rating-read'
             defaultValue={data?.rating}
@@ -114,7 +100,7 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
             readOnly
           />
         </Box>
-      </Card>
+      </StyledCard>
     </>
   );
 };

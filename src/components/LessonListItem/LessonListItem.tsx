@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { ListItemButton, ListItemText } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { LessonFromCourse } from "../../types/lesson";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import { StyledListItem } from "./styles";
 
 interface IProps {
   lesson: LessonFromCourse;
@@ -17,14 +18,7 @@ const LessonListItem: React.FC<IProps> = ({ lesson, index }) => {
 
   return (
     <>
-      <ListItem
-        sx={{
-          paddingTop: "0",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-        }}
-      >
+      <StyledListItem>
         <ListItemButton
           onClick={() => setIsShowVideo(!isShowVideo)}
           disabled={lesson.status === "locked"}
@@ -44,7 +38,7 @@ const LessonListItem: React.FC<IProps> = ({ lesson, index }) => {
             </motion.div>
           )}
         </AnimatePresence>
-      </ListItem>
+      </StyledListItem>
     </>
   );
 };
