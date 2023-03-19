@@ -17,3 +17,8 @@ You will also see any lint errors in the console.
 ### Technologies
 
 React, TypeScript, axios, mock-api, MaterialUI, framer-motion
+
+### Link
+
+Click to see the app -->
+Open [https://magenta-khapse-0623b7.netlify.app/](https://magenta-khapse-0623b7.netlify.app/) to view it in the browser.
