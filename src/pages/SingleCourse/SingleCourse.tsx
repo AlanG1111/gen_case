@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import {
+  Alert,
+  AlertTitle,
   Box,
   Card,
   CardContent,
@@ -54,6 +56,12 @@ const SingleCourse: React.FC = () => {
           <CircularProgress />
         </Box>
       )}
+      {loadingStatus === LoadingResultsT.FAILED && (
+        <Alert severity='error'>
+          <AlertTitle>Error</AlertTitle>
+          Something went wrong, please, try again later!
+        </Alert>
+      )}
       {courseInfo && (
         <Card
           sx={{
@@ -83,8 +91,8 @@ const SingleCourse: React.FC = () => {
               <ListItem>
                 <ListItemText primary='Lessons:' />
               </ListItem>
-              {courseInfo?.lessons?.map((lesson: LessonFromCourse) => (
-                <LessonListItem key={lesson.id} lesson={lesson} />
+              {courseInfo?.lessons?.map((lesson: LessonFromCourse, index) => (
+                <LessonListItem key={lesson.id} lesson={lesson} index={index} />
               ))}
             </List>
           </Box>

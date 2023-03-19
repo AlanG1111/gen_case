@@ -5,6 +5,8 @@ import {
   Pagination,
   Box,
   CircularProgress,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 import SingleLesson from "../../components/SingleLesson/SingleLesson";
 
@@ -20,7 +22,7 @@ import { actions as coursesActions } from "../../redux/courses/slice";
 import { CourseFromListType } from "../../types/lesson";
 import { LoadingResultsT } from "../../types/loading";
 
-const Courses: React.FC = (props) => {
+const Courses: React.FC = () => {
   const dispatch = useAppDispatch();
   const coursesList = useAppSelector((state) => getAllCourses(state));
   const loadingStatus = useAppSelector((state) =>
@@ -65,6 +67,12 @@ const Courses: React.FC = (props) => {
           >
             <CircularProgress />
           </Box>
+        )}
+        {loadingStatus === LoadingResultsT.FAILED && (
+          <Alert severity='error'>
+            <AlertTitle>Error</AlertTitle>
+            Something went wrong, please, try again later!
+          </Alert>
         )}
         {!!coursesListLength && (
           <Pagination
