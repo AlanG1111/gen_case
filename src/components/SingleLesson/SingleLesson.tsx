@@ -22,32 +22,25 @@ const SingleLesson: React.FC<ILesson> = ({ data }) => {
   const video = document.getElementById(data.id) as HTMLVideoElement;
 
   useEffect(() => {
-    let hls: any = null;
+    let hls: Hls | null = null;
     if (Hls.isSupported()) {
       hls = new Hls();
-      hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-        console.log("video and hls.js are now bound together !");
-      });
-      hls.on(Hls.Events.MANIFEST_PARSED, function (_: any, data: any) {
-        console.log(
-          "manifest loaded, found " + data?.levels.length + " quality level"
-        );
-      });
       hls.loadSource(`${data?.meta.courseVideoPreview?.link}`);
-      // bind them together
       hls.attachMedia(video);
     }
 
     return () => {
-      hls.destroy();
+      if (hls) {
+        hls.destroy();
+      }
     };
   }, [data?.meta.courseVideoPreview?.link, video]);
 
-  const togglePlayVideo = (e: any) => {
-    e.stopPropagation();
-    if (e.type === "mouseover" && video) {
+  const togglePlayVideo = (event: React.SyntheticEvent) => {
+    event.stopPropagation();
+    if (event.type === "mouseover" && video) {
       video.play();
-    } else if (e.type === "mouseleave" && video) {
+    } else if (event.type === "mouseleave" && video) {
       video.pause();
     }
   };
